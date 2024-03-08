@@ -1,0 +1,24 @@
+{
+  "name": "terminal",
+  "main": "index.js",
+  "type": "module",
+  "pear": {
+    "name": "terminal",
+    "type": "terminal"
+  },
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "brittle": "^3.0.0"
+  },
+  "scripts": {
+    "dev": "pear dev",
+    "test": "brittle test/*.test.js"
+  },
+  "dependencies": {
+    "b4a": "^1.6.6",
+    "bare-readline": "^1.0.0",
+    "bare-tty": "^3.2.0",
+    "hypercore-crypto": "^3.4.0",
+    "hyperswarm": "^4.7.14"
+  }
+}
