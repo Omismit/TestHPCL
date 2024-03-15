@@ -31,34 +31,60 @@ if (shouldCreateSwarm) {
 
 rl.input.setMode(tty.constants.MODE_RAW)
 rl.on('data', line => {
-  sendMessage(line)
+  if (line[0] === ":") {
+    selectCmd(line)
+  } else {
+    sendMessage(line)
+  }
   rl.prompt()
 })
 rl.prompt()
 
-async function createChatRoom () {
+async function createChatRoom() {
   const topicBuffer = crypto.randomBytes(32)
   await joinSwarm(topicBuffer)
   const topic = b4a.toString(topicBuffer, 'hex')
   console.log(`[info] Created new chat room: ${topic}`)
 }
 
-async function joinChatRoom (topicStr) {
+async function joinChatRoom(topicStr) {
   const topicBuffer = b4a.from(topicStr, 'hex')
   await joinSwarm(topicBuffer)
   console.log(`[info] Joined chat room`)
 }
 
-async function joinSwarm (topicBuffer) {
+async function joinSwarm(topicBuffer) {
   const discovery = swarm.join(topicBuffer, { client: true, server: true })
   await discovery.flushed()
 }
 
-function sendMessage (message) {
+function sendMessage(message) {
   const peers = [...swarm.connections]
   for (const peer of peers) peer.write(message)
 }
 
-function appendMessage ({ name, message }) {
+function appendMessage({ name, message }) {
   console.log(`[${name}] ${message}`)
+}
+
+function closeCli() {
+  process.exit(0)
+  console.log("Goodbye :-)")
+}
+
+function selectCmd(cmd) {
+  const value = cmd.split(' ')
+  switch (value[0]) {
+    case ":joinroom":
+      console.log('\n',value[1],'\n')
+      break;
+    case ":createroom":
+      console.log('\n',value[1],'\n')
+      break;
+    case ":listroom":
+      console.log('\n',value[1],'\n')
+      break;
+    default:
+      console.log('\n',"unrecognized command",'\n')
+  }
 }
