@@ -3,7 +3,8 @@ import b4a from 'b4a'
 import crypto from 'hypercore-crypto'
 import readline from 'bare-readline'
 import tty from 'bare-tty'
-//import * as fs from 'fs'///add for read files
+
+
 
 const { teardown, config } = Pear
 const key = config.args.pop()
@@ -15,15 +16,6 @@ const rl = readline.createInterface({
 })
 
 const list =[]
-
-/*fs.readFile("./chtrooms.json", "utf8", (err, jsonString) => {
-  try {
-    const chats = JSON.parse(jsonString);
-  } catch (err) {
-    console.log(err);
-    return;
-  }
-});*/
 
 swarm.on('connection', peer => {
   const name = b4a.toString(peer.remotePublicKey, 'hex').substr(0, 6)
@@ -97,11 +89,9 @@ async function selectCmd(cmd) {
       break;
     case ":listroom":
       if(list.length>0){
-      var i=0;
       console.log('\n')
-      list.forEach(element => {
-        console.log(i,'-',element,'\n')
-        i++
+      list.forEach((item, index) => {
+        console.log(index,'-',item,'\n')
       });
     }else{
       console.log('\n You don\'t have chat rooms created.')
