@@ -13,7 +13,7 @@ const rl = readline.createInterface({
   output: new tty.WriteStream(1)
 })
 
-const list =[]
+const list = []
 
 swarm.on('connection', peer => {
   const name = b4a.toString(peer.remotePublicKey, 'hex').substr(0, 6)
@@ -25,12 +25,11 @@ swarm.on('update', () => {
   console.log(`[info] Number of connections is now ${swarm.connections.size}`)
 })
 
-console.log('Welcome, commands acepted: \n :joinroom id or number of room \n :createroom \n :listroom \n');
-
+console.log('Welcome, commands acepted: \n :joinroom id or number of room \n :createroom \n :listroom \n')
 
 rl.input.setMode(tty.constants.MODE_RAW)
 rl.on('data', line => {
-  if (line[0] === ":") {
+  if (line[0] === ':') {
     selectCmd(line)
   } else {
     sendMessage(line)
@@ -39,7 +38,7 @@ rl.on('data', line => {
 })
 rl.prompt()
 
-async function createChatRoom() {
+async function createChatRoom () {
   const topicBuffer = crypto.randomBytes(32)
   await joinSwarm(topicBuffer)
   const topic = b4a.toString(topicBuffer, 'hex')
@@ -47,51 +46,50 @@ async function createChatRoom() {
   list.push(topic)
 }
 
-async function joinChatRoom(topicStr) {
+async function joinChatRoom (topicStr) {
   const topicBuffer = b4a.from(topicStr, 'hex')
   await joinSwarm(topicBuffer)
-  console.log(`[info] Joined chat room`)
+  console.log('[info] Joined chat room')
 }
 
-async function joinSwarm(topicBuffer) {
+async function joinSwarm (topicBuffer) {
   const discovery = swarm.join(topicBuffer, { client: true, server: true })
   await discovery.flushed()
 }
 
-function sendMessage(message) {
+function sendMessage (message) {
   const peers = [...swarm.connections]
   for (const peer of peers) peer.write(message)
 }
 
-function appendMessage({ name, message }) {
+function appendMessage ({ name, message }) {
   console.log(`[${name}] ${message}`)
 }
 
-
-async function selectCmd(cmd) {
+async function selectCmd (cmd) {
   const value = cmd.split(' ')
   switch (value[0]) {
-    case ":joinroom":
-      if(value[1].length<32){
+    case ':joinroom':
+      if (value[1].length < 32) {
         await joinChatRoom(list[value[1]])
-      }else{
+      } else {
         await joinChatRoom(value[1])
       }
-      break;
-    case ":createroom":
+      break
+    case ':createroom':
       await createChatRoom()
-      break;
-    case ":listroom":
-      if(list.length>0){
-      console.log('\n')
-      list.forEach((item, index) => {
-        console.log(index,'-',item,'\n')
-      });
-    }else{
-      console.log('\n You don\'t have chat rooms created.')
-    }
-      break;
+      break
+    case ':listroom':
+      if (list.length > 0) {
+        console.log('\n')
+        list.forEach((item, index) => {
+          console.log(index, '-', item, '\n')
+        })
+      } else {
+        console.log('\n You don\'t have chat rooms created.')
+      }
+      break
     default:
-      console.log('\n',"unrecognized command",'\n')
+      console.log('\n', 'unrecognized command', '\n')
   }
 }
