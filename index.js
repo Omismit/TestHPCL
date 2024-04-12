@@ -4,8 +4,6 @@ import crypto from 'hypercore-crypto'
 import readline from 'bare-readline'
 import tty from 'bare-tty'
 
-
-
 const { teardown, config } = Pear
 const key = config.args.pop()
 const shouldCreateSwarm = !key
@@ -28,11 +26,7 @@ swarm.on('update', () => {
 })
 
 console.log('Welcome, commands acepted: \n :joinroom id or number of room \n :createroom \n :listroom \n');
-//if (shouldCreateSwarm) {
-//  await createChatRoom()
-//} else {
-//  await joinChatRoom(key)
-//}
+
 
 rl.input.setMode(tty.constants.MODE_RAW)
 rl.on('data', line => {

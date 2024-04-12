@@ -19,7 +19,6 @@
     "bare-readline": "^1.0.0",
     "bare-tty": "^3.2.0",
     "hypercore-crypto": "^3.4.0",
-    "hyperswarm": "^4.7.14",
-    "jsonfile": "^6.1.0"
+    "hyperswarm": "^4.7.14"
   }
 }
