@@ -26,3 +26,6 @@ This will created a new chatroom and save this room in the list of chatrooms(thi
 ```js
 > :listroom
 ```
+This command list all rooms created in the app, with an assigned number to be more easy select the room with the next command
+
+### Change of room
