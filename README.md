@@ -18,6 +18,8 @@ After that the Cli start working, don't create a chat room by default, for that 
 The app use the format ":<coomand>" to distinguish messages from commands to create a new room you need execute the next command.
 ```js
 > :createroom
+[info] Created new chat room: cf17c26bb89a554222ccc7ad86e04d198ca37f1aefacf5577e75327f087b43cf
+>
 ```
 
 This will created a new chatroom and save this room in the list of chatrooms(this list it's not save in disk, we stil work on that), to see the old chatrooms created, execute the next command.
