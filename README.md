@@ -35,3 +35,14 @@ This will created a new chatroom and save this room in the list of chatrooms(thi
 This command list all rooms created in the app, with an assigned number to be more easy select the room with the next command
 
 ### Change of room
+This option let you change between chatrooms using like parameter the number of the list or using the full key of the chatroom, even you can use the key of other chatroom out of your list.
+
+```js
+> :joinroom 0
+
+```
+or
+
+```js
+> :joinroom cf17c26bb89a554222ccc7ad86e04d198ca37f1aefacf5577e75327f087b43cf
+```
