@@ -12,7 +12,7 @@
   },
   "scripts": {
     "dev": "pear dev",
-    "test": "brittle test/*.test.js"
+    "test": "brittle test/all.js"
   },
   "dependencies": {
     "b4a": "^1.6.6",
