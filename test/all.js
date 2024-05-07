@@ -1,10 +1,9 @@
-import test from 'brittle'
+import { configure, test} from 'brittle'
 import Hyperswarm from 'hyperswarm'
 import b4a from 'b4a'
 import crypto from 'hypercore-crypto'
-import readline from 'bare-readline'
 
-
+configure({ timeout: 15000, bail: true })
 const swarm = new Hyperswarm()
 const list = []
 runTests()
